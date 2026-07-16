@@ -3,17 +3,17 @@ import json
 import csv 
 import customtkinter as ctk
 import getpass 
+from pathlib import Path
 
 # All the classes/modules that I am using for my project 
 from datetime import DateTimeWidget 
 from to_do import ToDoList
 from tab_set import AutoTabOpen
-from colour_swap import ColourSwap
+from cpu_gpu_perf import PerfGraph
 from goal import Goal 
 from weather import Weather 
 from pc_display import PCDisplay
 from prod_graph import ProdGraph
-from pathlib import Path
 
 # import fonts 
 DIR = Path(__file__).resolve().parent
@@ -56,7 +56,7 @@ app.minsize(1920, 1050)
 clock = DateTimeWidget(master = app)
 to_do = ToDoList(master = app, values = to_do_values)
 tab = AutoTabOpen(master = app) 
-colour = ColourSwap(master = app)
+hardware = PerfGraph(master = app)
 goal = Goal(master = app) 
 weather = Weather(master = app)
 pc_display = PCDisplay(master = app)
@@ -64,8 +64,8 @@ pc_display = PCDisplay(master = app)
 # add all the widgets to the grid 
 clock.grid(row = 1, column = 1, padx = 20, pady = 20)
 to_do.grid(row = 1, column = 2, sticky = "nsew", padx = 40)
-tab.grid(row = 0, column = 1, sticky = "nwe", pady = 50)
-colour.grid(row = 0, column = 2, sticky = "ne", padx = 200, pady= 100)
+tab.grid(row = 0, column = 1, sticky = "nwe", pady = 60)
+hardware.grid(row = 0, column = 2, sticky = "ne", padx = 200, pady= 100)
 goal.grid(row = 2, column = 2, sticky = "e", padx = 40)
 weather.grid(row = 0, column = 0)
 pc_display.grid(row = 1, column = 0)

@@ -17,8 +17,8 @@ class ToDoList(ctk.CTkScrollableFrame):
         self.stc = ctk.CTkFont(family=base_font[0], size=base_font[1], overstrike=True)
         
         # create a label for the to do list 
-        self.header = ctk.CTkLabel(master, text = "To - Do", font = ("Google Sans Flex", 30, "bold"), text_color = "white", fg_color="transparent", bg_color="transparent")
-        self.header.grid(row = 0, column = 2, sticky = "sw", padx = 230)
+        self.header = ctk.CTkLabel(master, text = "📝 To - Do", font = ("Google Sans Flex", 30, "bold"), text_color = "white", fg_color="transparent", bg_color="transparent")
+        self.header.grid(row = 0, column = 2, sticky = "sw", padx = 180)
         
         # create a button on the to do list 
         self.button = ctk.CTkButton(master, text = "Add Items", font = ("Google Sans Flex", 18, "normal"), corner_radius = 100, text_color = "white", fg_color="black", bg_color="transparent", command = self.button_pressed)

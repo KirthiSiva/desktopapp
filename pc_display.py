@@ -1,6 +1,6 @@
 # this is the widget which will hold the information of the current device. 
+# this widget has a LOT of libraries because there are many libaries which have different components that they can bring. 
 import customtkinter as ctk 
-import json 
 import socket
 import psutil 
 import platform
@@ -19,7 +19,7 @@ class PCDisplay(ctk.CTkFrame):
         super().__init__(master, width, height, corner_radius, border_width, bg_color, fg_color, border_color, background_corner_colors, overwrite_preferred_drawing_method, **kwargs)
         
         # create a heading for this widget 
-        self.lbl = ctk.CTkLabel(master, text = "About PC", font = ("Google Sans Flex", 30, "bold"), text_color = "white", fg_color="transparent", bg_color="transparent")
+        self.lbl = ctk.CTkLabel(master, text = "About PC 💻", font = ("Google Sans Flex", 30, "bold"), text_color = "white", fg_color="transparent", bg_color="transparent")
         self.lbl.grid(row = 1, column = 0, sticky = "n", pady = 15)
         
         # Placeholder to detect if system is PC or Laptop
@@ -68,12 +68,12 @@ class PCDisplay(ctk.CTkFrame):
             life_lbl = ctk.CTkLabel(master, bg_color = "#2B2B2B", fg_color = "#2B2B2B", text = self.time_left, font = ("Google Sans Flex", 17, "normal"), text_color = "white")
             life_lbl.grid(row = 1, column = 0, sticky = "s", pady = 120, padx = 100)
             
-            # pc name 
-            pc_lbl = ctk.CTkLabel(master, bg_color = "#2B2B2B", fg_color = "#2B2B2B", text = f"PC name: {self.pc_name}", font = ("Google Sans Flex", 20, "normal"), text_color = "white")
-            pc_lbl.grid(row = 1, column = 0, sticky = "ne", pady = 80, padx = 230)
-            
-            # pc version 
-            pc_lbl = ctk.CTkLabel(master, bg_color = "#2B2B2B", fg_color = "#2B2B2B", text = f"Version: {self.pc_platform}", font = ("Google Sans Flex", 14, "normal"), text_color = "white")
-            pc_lbl.grid(row = 1, column = 0, sticky = "ne", pady = 120, padx = 170)
+        # pc name 
+        pc_lbl = ctk.CTkLabel(master, bg_color = "#2B2B2B", fg_color = "#2B2B2B", text = f"PC name: {self.pc_name}", font = ("Google Sans Flex", 20, "normal"), text_color = "white")
+        pc_lbl.grid(row = 1, column = 0, sticky = "ne", pady = 80, padx = 230)
+        
+        # pc version 
+        pc_lbl = ctk.CTkLabel(master, bg_color = "#2B2B2B", fg_color = "#2B2B2B", text = f"Version: {self.pc_platform}", font = ("Google Sans Flex", 14, "normal"), text_color = "white")
+        pc_lbl.grid(row = 1, column = 0, sticky = "ne", pady = 120, padx = 170)
             
        

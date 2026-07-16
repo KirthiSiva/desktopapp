@@ -27,6 +27,11 @@ class AutoTabOpen(ctk.CTkFrame):
     def __init__(self, master, width = 200, height = 50, corner_radius = 100, border_width = None, bg_color = "transparent", fg_color = None, border_color = None, background_corner_colors = None, overwrite_preferred_drawing_method = None, **kwargs):
         super().__init__(master, width, height, corner_radius, border_width, bg_color, fg_color, border_color, background_corner_colors, overwrite_preferred_drawing_method, **kwargs)
 
+        # add a label 
+        self.lbl = ctk.CTkLabel(master, text = "Quick Start", font = ("Google Sans Flex", 30, "bold"), text_color = "white", fg_color="transparent", bg_color="transparent")
+        self.lbl.grid(row = 0, column = 1, sticky = "nw", padx = 150)
+
+        # add a button 
      
        
         
