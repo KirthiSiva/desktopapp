@@ -21,7 +21,7 @@ class ToDoList(ctk.CTkScrollableFrame):
         self.header.grid(row = 0, column = 2, sticky = "sw", padx = 230)
         
         # create a button on the to do list 
-        self.button = ctk.CTkButton(master, text = "Add Items", font = ("Google Sans Flex", 18, "normal"), corner_radius = 100, text_color = "white", fg_color="black", bg_color="transparent", command = button_pressed)
+        self.button = ctk.CTkButton(master, text = "Add Items", font = ("Google Sans Flex", 18, "normal"), corner_radius = 100, text_color = "white", fg_color="black", bg_color="transparent", command = self.button_pressed)
         self.button.grid(row = 0, column = 2, sticky = "se", padx = 150, pady = 7)
 
         # add checkboxes 
@@ -92,12 +92,37 @@ class ToDoList(ctk.CTkScrollableFrame):
         # FIGURE THIS OUT LATER
     
     # function for when the "add" button is clicked (open the input)
-    def button_pressed(): 
-        pass 
-    
-    # add new popup function (use input dialog)
-    
-    # add item function 
-    
-    
+    def button_pressed(self): 
+        #1: Create the dialogue box to get user input 
+        # put this all in a loop so that it does not move on until it is done/not a dupe!  
+        while True:
+            # Create a variable to save state of dupe, and if it's empty 
+            isDupe = False
+            isEmpty = True
+            
+            dialog =  ctk.CTkInputDialog(text = "Enter a new goal! *cannot add duplicates!*", title = "New To-Do List Item")
+            user_input = dialog.get_input().strip()
+
+            # Give the user a pathway to leave (Cancel button or x)
+            if user_input == None: 
+                return # break out of the function 
+            
+            #2: Make sure this is not a duplicate 
+            for _ in self.checkboxes: 
+                if _.cget("text") == user_input: 
+                    isDupe = True 
+                    break
+            
+            #3: Make sure it is not empty 
+            if user_input != "": 
+                isEmpty = False
+            
+            if not isDupe and not isEmpty: 
+                break
         
+        #4: Now that it is good, add it to the list! 
+        index_to_add = len(self.checkboxes)
+        
+        new_item = ctk.CTkCheckBox(self, text = user_input, font = ("Google Sans Flex", 18, "bold"), text_color = "white", command = self.on_completed, checkmark_color="black", fg_color= "white", hover_color="white")
+        new_item.grid(row=index_to_add, column=0, padx=10, pady=(10, 0), sticky="w")
+        self.checkboxes.append(new_item)

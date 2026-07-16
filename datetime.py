@@ -10,28 +10,15 @@ class DateTimeWidget(ctk.CTkFrame):
         # add a grid 
         
         # placeholder for the time 
-        self.clock_lbl = ctk.CTkLabel(self, 
-                                      text = "00:00:00", 
-                                      font = ("Google Sans Flex", 96, "bold"))
+        self.clock_lbl = ctk.CTkLabel(self, text = "00:00:00", font = ("Google Sans Flex", 96, "bold"))
         self.clock_lbl.pack(pady=(0, 0))
         
         # placeholder for the date 
-        self.date_lbl = ctk.CTkLabel(self, 
-                                     text = "Loading Date...", 
-                                     font = ("Google Sans Flex", 18, "normal"),
-                                     text_color = "gray")
+        self.date_lbl = ctk.CTkLabel(self,  text = "Loading Date...", font = ("Google Sans Flex", 18, "normal"),text_color = "gray")
         self.date_lbl.pack(pady=(0, 5))
         
         # toggle button for 24 hrs and 12 hr 
-        self.tgl_btn = ctk.CTkButton(
-            self, 
-            text = "12 hr",
-            fg_color = "gray",
-            bg_color= "black",
-            hover_color= "black",
-            text_color="white",
-            command=self.toggle_format
-        )
+        self.tgl_btn = ctk.CTkButton(self, text = "12 hr", font = ("Google Sans Flex", 14, "bold"), fg_color = "gray", bg_color= "black", hover_color= "black", text_color="white", command=self.toggle_format)
         self.tgl_btn.pack(pady=5)
         
         # start the loop of the clock

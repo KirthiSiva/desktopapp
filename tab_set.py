@@ -22,10 +22,11 @@ class TabButton(ctk.CTkButton):
     pass
     # figure out how to detect button state to launch window and change url 
 
+# have a button in here to actually open all the tabs
 class AutoTabOpen(ctk.CTkFrame):
     def __init__(self, master, width = 200, height = 50, corner_radius = 100, border_width = None, bg_color = "transparent", fg_color = None, border_color = None, background_corner_colors = None, overwrite_preferred_drawing_method = None, **kwargs):
         super().__init__(master, width, height, corner_radius, border_width, bg_color, fg_color, border_color, background_corner_colors, overwrite_preferred_drawing_method, **kwargs)
 
-    # have a button in here to actually open all the tabs 
+     
        
         
