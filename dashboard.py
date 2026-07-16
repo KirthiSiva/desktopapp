@@ -13,9 +13,8 @@ from goal import Goal
 from weather import Weather 
 from pc_display import PCDisplay
 from prod_graph import ProdGraph
+from pathlib import Path
 
-
-# should probably turn this all into a class soon 
 
 # import fonts 
 ctk.FontManager.load_font("GoogleSansFlex-VariableFont_GRAD,ROND,opsz,slnt,wdth,wght.ttf")
@@ -37,14 +36,6 @@ to_do_values = ["hello"]
 # start the dashboard 
 app = ctk.CTk() 
 
-# find a scale factor so that this looks good at any resolution 
-# first, find the dimensions of the application, then divide by 1080 to get the factor 
-# the scale factor will be exactly 1 when you are at
-screen_height = app.winfo_screenheight()
-scale_factor = screen_height / 1080
-
-# If i cannot figure this out, then I force a certain resolution. 
-
 # define the grid 
 app.columnconfigure((0, 1, 2), weight=1, uniform="hello")
 app.rowconfigure((0, 1, 2), weight=1, uniform="hello")
@@ -57,7 +48,7 @@ app.title(f"Welcome, {name}!") # use the "getpass" library to get the username o
 app.after(0, lambda: app.state('zoomed'))
 
 # set a minimum size that the screen can be 
-app.minsize(1368, 768)
+app.minsize(1920, 1050)
 
 # define all the widgets to add to the program
 clock = DateTimeWidget(master = app)
