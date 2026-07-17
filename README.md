@@ -1,6 +1,6 @@
 # Monochromia - Smart Dashboard with the most simple, minimalistic UI 
 
-DISCLAIMER: This app requires at least a 1920x1080 screen, and it is only tested for Windows! 
+**DISCLAIMER:** This app requires at least a 1920x1080 screen, and it is only tested for Windows! 
 
 --- 
 
@@ -49,7 +49,7 @@ Monochromia is filled with many widgets to make sure that it stays functional an
 ### PC Info
 
 
-## Pomodoro Timer
+### Pomodoro Timer
 
 
-## RAM/CPU Performance Checker
+### RAM/CPU Performance Checker
