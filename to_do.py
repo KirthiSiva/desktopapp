@@ -21,7 +21,7 @@ class ToDoList(ctk.CTkScrollableFrame):
         self.header.grid(row = 0, column = 2, sticky = "sw", padx = 180)
         
         # create a button on the to do list 
-        self.button = ctk.CTkButton(master, text = "Add Items", font = ("Google Sans Flex", 18, "normal"), corner_radius = 100, text_color = "white", fg_color="black", bg_color="transparent", command = self.button_pressed)
+        self.button = ctk.CTkButton(master, text = "Add Items", font = ("Google Sans Flex", 18, "normal"), corner_radius = 100, text_color = "white", fg_color="black", bg_color="transparent", command = self.button_pressed, hover_color="gray")
         self.button.grid(row = 0, column = 2, sticky = "se", padx = 150, pady = 7)
 
         # add checkboxes 
@@ -101,11 +101,13 @@ class ToDoList(ctk.CTkScrollableFrame):
             isEmpty = True
             
             dialog =  ctk.CTkInputDialog(text = "Enter a new goal! *cannot add duplicates!*", title = "New To-Do List Item")
-            user_input = dialog.get_input().strip()
+            user_input = dialog.get_input()
 
             # Give the user a pathway to leave (Cancel button or x)
             if user_input == None: 
                 return # break out of the function 
+            else: 
+                user_input = dialog.get_input().strip() # strip to get rid of white space
             
             #2: Make sure this is not a duplicate 
             for _ in self.checkboxes: 
