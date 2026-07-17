@@ -3,6 +3,8 @@
 # i will also be using a json to SAVE the data from the web opener 
 import webbrowser
 import customtkinter as ctk 
+import json
+import os
 
 # create a class for the buttons holding the url 
 # why a new class: I want to be able to store the url on the backend, and a class would allow me to have back-end properties.
@@ -61,6 +63,9 @@ class AutoTabOpen(ctk.CTkFrame):
         self.btn_5.grid(row = 0, column = 4)
         self.btn_6.grid(row = 0, column = 5)
         
+        # load the tabs from the json
+        self.load_tabs()
+        
     # edit function works for all the buttons since the code is equivalent 
     def edit(self, button): 
         #1: get the url the button is currently holding (it is FINE if it is empty right now)
@@ -88,6 +93,9 @@ class AutoTabOpen(ctk.CTkFrame):
         else: 
             button.configure(text = "Empty")
         
+        # save to the json  
+        self.save_tabs()
+        
     # this function is used to actually open everything in your browser. 
     # extremely simple, just open them all using the "webbrowser" library
     def open_all_pressed(self):
@@ -114,3 +122,102 @@ class AutoTabOpen(ctk.CTkFrame):
                 
             if self.btn_6.cget("text") != "Empty":
                 webbrowser.open(f"{self.btn_6.url}") 
+    
+    # file storage 
+    def save_tabs(self): 
+        tab_data = [] # empty list to hold everything 
+        
+        # add everything manually 
+        # tab #1 
+        tab_data.append({
+            "text": self.btn_1.cget("text"),
+            "url": self.btn_1.url
+        })
+        
+        # tab #2 
+        tab_data.append({
+            "text": self.btn_2.cget("text"),
+            "url": self.btn_2.url
+        })
+        
+        # tab #3 
+        tab_data.append({
+            "text": self.btn_3.cget("text"),
+            "url": self.btn_3.url
+        })
+        
+        # tab #4 
+        tab_data.append({
+            "text": self.btn_4.cget("text"),
+            "url": self.btn_4.url
+        })
+        
+        # tab #5 
+        tab_data.append({
+            "text": self.btn_5.cget("text"),
+            "url": self.btn_5.url
+        })
+        
+        # tab #6
+        tab_data.append({
+            "text": self.btn_6.cget("text"),
+            "url": self.btn_6.url
+        })
+        
+        # save it to the json
+        # I am saving it with os path to make it cross compatible 
+        save_path = os.path.join("saves", "tabs.json")
+        with open(save_path, "w") as f: 
+            json.dump(tab_data, f, indent = 4)
+            
+    # create a load function 
+    def load_tabs(self):
+        save_path = os.path.join("saves", "tabs.json")
+        
+        # In case the file is not found, make it 
+        if not os.path.exists(save_path): 
+            # use a try and except in case it fails to make the file 
+            try: 
+                # write in the file to make it 
+                # same logic as java!
+                with open(save_path, "w") as f: 
+                    json.dump([], f, indent = 4)
+                    
+            except Exception: 
+                return # if it still fails then just exit the function
+        
+        # now, read from the file 
+        try: 
+            # use read instead of write ("w")
+            # load in all the data
+            with open(save_path, "r") as f:
+                tab_data = json.load(f)
+            
+            # same as the save function; manually load back
+            
+            # tab 1: 
+            self.btn_1.configure(text = tab_data[0]["text"])
+            self.btn_1.url = tab_data[0]["url"]
+            
+            # tab 2: 
+            self.btn_2.configure(text = tab_data[1]["text"])
+            self.btn_2.url = tab_data[1]["url"]
+            
+            # tab 3: 
+            self.btn_3.configure(text = tab_data[2]["text"])
+            self.btn_3.url = tab_data[2]["url"]
+            
+            # tab 4: 
+            self.btn_4.configure(text = tab_data[3]["text"])
+            self.btn_4.url = tab_data[3]["url"]
+            
+            # tab 5: 
+            self.btn_5.configure(text = tab_data[4]["text"])
+            self.btn_5.url = tab_data[4]["url"]
+            
+            # tab 6: 
+            self.btn_6.configure(text = tab_data[5]["text"])
+            self.btn_6.url = tab_data[5]["url"]
+            
+        except Exception: 
+            return # if this doesnt work return

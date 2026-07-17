@@ -2,6 +2,8 @@
 import customtkinter as ctk
 import getpass 
 from pathlib import Path
+import json
+import os
 
 # this library is important to stop any crashing from the threading
 # I have in the APIs 
@@ -43,10 +45,12 @@ app.after(0, lambda: app.state('zoomed'))
 # set a minimum size that the screen can be 
 app.minsize(1920, 1050)
 
+# make a function to load in the json from the 
+
 # define all the widgets to add to the program
 fractal = Fractal(master = app)
 clock = DateTimeWidget(master = app)
-to_do = ToDoList(master = app, values = [], fractal = fractal)
+to_do = ToDoList(master = app, fractal = fractal)
 tab = AutoTabOpen(master = app) 
 hardware = PerfGraph(master = app)
 quotes = QuoteGen(master = app) 

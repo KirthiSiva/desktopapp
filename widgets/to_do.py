@@ -1,8 +1,10 @@
 import customtkinter as ctk  
 import tkinter.font as tkfont
+import json # for file storage 
+import os # also for file storage 
 
 class ToDoList(ctk.CTkScrollableFrame):
-    def __init__(self, master, values, fractal, width = 200, height = 200, corner_radius = 50, border_width = None, bg_color = "transparent", fg_color = None, border_color = None, scrollbar_fg_color = None, scrollbar_button_color = None, scrollbar_button_hover_color = None, label_fg_color = None, label_text_color = None, label_text = "", label_font = None, label_anchor = "center", orientation = "vertical"):
+    def __init__(self, master, fractal, width = 200, height = 200, corner_radius = 50, border_width = None, bg_color = "transparent", fg_color = None, border_color = None, scrollbar_fg_color = None, scrollbar_button_color = None, scrollbar_button_hover_color = None, label_fg_color = None, label_text_color = None, label_text = "", label_font = None, label_anchor = "center", orientation = "vertical"):
         super().__init__(master, width, height, corner_radius, border_width, bg_color, fg_color, border_color, scrollbar_fg_color, scrollbar_button_color, scrollbar_button_hover_color, label_fg_color, label_text_color, label_text, label_font, label_anchor, orientation)
        
         # add the fractal here 
@@ -12,7 +14,6 @@ class ToDoList(ctk.CTkScrollableFrame):
         self.grid_columnconfigure(0, weight = 1)
        
         # declare some variables for the checkboxes (to-do "items")
-        self.values = values
         self.checkboxes = []
         
         # create a "strike through" font when it is completed
@@ -27,11 +28,8 @@ class ToDoList(ctk.CTkScrollableFrame):
         self.button = ctk.CTkButton(master, text = "Add Items", font = ("Google Sans Flex", 18, "normal"), corner_radius = 100, text_color = "white", fg_color="black", bg_color="transparent", command = self.button_pressed, hover_color="gray")
         self.button.grid(row = 0, column = 2, sticky = "se", padx = 150, pady = 7)
 
-        # add checkboxes 
-        for i, value in enumerate(self.values):
-            to_do_item = ctk.CTkCheckBox(self, text = value, font = ("Google Sans Flex", 18, "bold"), text_color = "white", command = self.on_completed, checkmark_color="black", fg_color= "white", hover_color="white")
-            to_do_item.grid(row=i, column=0, padx=10, pady=(10, 0), sticky="w")
-            self.checkboxes.append(to_do_item)
+        # load from JSON
+        self.load_to_do()
     
     # function to form a dictionary of all the current items 
     # this is convient for constantly reprinting the list of to_do items! 
@@ -47,7 +45,7 @@ class ToDoList(ctk.CTkScrollableFrame):
             _.grid_forget()
         
         return all_to_do
-    
+            
     # function used to count number of completed items in the to-do list
     def get(self): 
         checked_counter = 0
@@ -93,6 +91,9 @@ class ToDoList(ctk.CTkScrollableFrame):
             self.get(),
             self.return_total()
         )
+        
+        # save to the JSON
+        self.save_to_do()
     
     # function to return the total length of the checkboxes (how many there are total)
     def return_total(self): 
@@ -141,3 +142,64 @@ class ToDoList(ctk.CTkScrollableFrame):
             self.get(),
             self.return_total()
         )
+        
+    
+    # FILE STORAGE: 
+    # There are 2 different functions needed: save, load
+    def save_to_do(self): 
+        todo_data = [] # empty list to hold everything 
+        
+        # use a for loop to add everything 
+        for _ in self.checkboxes: 
+            todo_data.append({
+                "text": _.cget("text"),
+                "completed": bool(_.get()) # get() gives the status of if its clicked or not, and the bool changes it from "1" to True!
+            })
+            
+        # save it to the json
+        # I am saving it with os path to make it cross compatible 
+        save_path = os.path.join("saves", "to_do.json")
+        with open(save_path, "w") as f: 
+            json.dump(todo_data, f, indent = 4)
+            
+    # create a load function 
+    def load_to_do(self):
+        save_path = os.path.join("saves", "to_do.json")
+        
+        # In case the file is not found, make it 
+        if not os.path.exists(save_path): 
+            # use a try and except in case it fails to make the file 
+            try: 
+                # write in the file to make it 
+                # same logic as java!
+                with open(save_path, "w") as f: 
+                    json.dump([], f, indent = 4)
+                    
+            except Exception: 
+                return # if it still fails then just exit the function
+        
+        # now, read from the file 
+        try: 
+            # use read instead of write ("w")
+            # load in all the data
+            with open(save_path, "r") as f:
+                todo_data = json.load(f)
+                
+            # use a for loop to add all the items back
+            for item in todo_data:     
+                new_item = ctk.CTkCheckBox(self, text  = item["text"], font=("Google Sans Flex", 18, "bold"), text_color="white", command=self.on_completed, checkmark_color="black", fg_color="white", hover_color="white")
+                
+                # set them as selected or deselected
+                # (the checkboxes)
+                if item["completed"]: 
+                    new_item.select()
+                else: 
+                    new_item.deselect()
+                
+                # add this back to the list now 
+                self.checkboxes.append(new_item)
+                
+            self.on_completed() # refresh the list
+            
+        except Exception: 
+            return # if this doesnt work return
