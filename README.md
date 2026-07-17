@@ -13,8 +13,3 @@ pillow
 psutil
 
 Features of Monochromia: 
-
-
-Features I would've wanted/will be adding 
-
-

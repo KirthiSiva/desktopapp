@@ -69,7 +69,7 @@ class PCDisplay(ctk.CTkFrame):
             life_lbl.grid(row = 1, column = 0, sticky = "s", pady = 120, padx = 100)
             
         # pc name 
-        pc_lbl = ctk.CTkLabel(master, bg_color = "#2B2B2B", fg_color = "#2B2B2B", text = f"{self.pc_name}", font = ("Google Sans Flex", 20, "normal"), text_color = "white", justify = "center", anchor = "center", border_color="white", border_width=5)
+        pc_lbl = ctk.CTkLabel(master, bg_color = "#2B2B2B", fg_color = "#2B2B2B", text = f"{self.pc_name}", font = ("Google Sans Flex", 20, "normal"), text_color = "white")
         pc_lbl.grid(row = 1, column = 0, rowspan = 2, sticky = "ne", pady = 80, padx = 230)
         
         # pc version 
