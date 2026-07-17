@@ -89,7 +89,7 @@ class AutoTabOpen(ctk.CTkFrame):
             button.configure(text = "Empty")
         
     # this function is used to actually open everything in your browser. 
-    # extremely simple, just open them all using hte "webbrowser" library
+    # extremely simple, just open them all using the "webbrowser" library
     def open_all_pressed(self):
         webbrowser.open(f"{self.btn_1.url}") 
         webbrowser.open(f"{self.btn_2.url}") 
