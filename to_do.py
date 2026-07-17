@@ -101,13 +101,13 @@ class ToDoList(ctk.CTkScrollableFrame):
             isEmpty = True
             
             dialog =  ctk.CTkInputDialog(text = "Enter a new goal! *cannot add duplicates!*", title = "New To-Do List Item")
-            user_input = dialog.get_input()
+            raw_input = dialog.get_input()
 
             # Give the user a pathway to leave (Cancel button or x)
-            if user_input == None: 
-                return # break out of the function 
+            if raw_input != None: 
+                user_input = raw_input.strip() # strip to get rid of white space
             else: 
-                user_input = dialog.get_input().strip() # strip to get rid of white space
+                return # break out of the function 
             
             #2: Make sure this is not a duplicate 
             for _ in self.checkboxes: 

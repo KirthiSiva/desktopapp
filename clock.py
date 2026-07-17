@@ -7,8 +7,6 @@ class DateTimeWidget(ctk.CTkFrame):
         
         self.is_24hr = True # gather the state of the clock 
         
-        # add a grid 
-        
         # placeholder for the time 
         self.clock_lbl = ctk.CTkLabel(self, text = "00:00:00", font = ("Google Sans Flex", 96, "bold"))
         self.clock_lbl.pack(pady=(0, 0))

@@ -6,7 +6,7 @@ import getpass
 from pathlib import Path
 
 # All the classes/modules that I am using for my project 
-from datetime import DateTimeWidget 
+from clock import DateTimeWidget 
 from to_do import ToDoList
 from tab_set import AutoTabOpen
 from cpu_gpu_perf import PerfGraph
@@ -19,9 +19,6 @@ from pomodoro import Timer
 DIR = Path(__file__).resolve().parent
 google_font_dir = DIR / "assets" / "GoogleSansFlex-VariableFont_GRAD,ROND,opsz,slnt,wdth,wght.ttf"
 ctk.FontManager.load_font(str(google_font_dir))
-
-# set a value for "values" for the to-do list checklists
-to_do_values = ["hello"]
 
 # function to read from the to_do list json
 def save_read_todo(): 
@@ -47,7 +44,7 @@ app.minsize(1920, 1050)
 
 # define all the widgets to add to the program
 clock = DateTimeWidget(master = app)
-to_do = ToDoList(master = app, values = to_do_values)
+to_do = ToDoList(master = app, values = [])
 tab = AutoTabOpen(master = app) 
 hardware = PerfGraph(master = app)
 goal = Goal(master = app) 
