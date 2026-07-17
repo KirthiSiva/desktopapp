@@ -62,6 +62,9 @@ pc_display = PCDisplay(master = app)
 timer = Timer(master = app)
 
 # add all the widgets to the grid 
+# rowspan and columnspan make it able to "leave" its own quadrant! perfect for what I want 
+fractal.grid(row = 0, column = 0, rowspan=3, columnspan=3) # it starts at the center 
+
 clock.grid(row = 1, column = 1, padx = 20, pady = 20)
 to_do.grid(row = 1, column = 2, sticky = "nsew", padx = 40)
 tab.grid(row = 0, column = 1, sticky = "nwe", pady = 60)
@@ -70,9 +73,6 @@ quotes.grid(row = 2, column = 2, sticky = "we", padx = (70))
 weather.grid(row = 0, column = 0)
 pc_display.grid(row = 1, column = 0)
 timer.grid(row = 2, column = 0, sticky = "we", padx = (100, 0))
-
-# rowspan and columnspan make it able to "leave" its own quadrant! perfect for what I want 
-fractal.grid(row = 1, column = 1, rowspan=3, columnspan=3, sticky="nsew") # it starts at the center 
 
 # start the main loop 
 app.mainloop()
