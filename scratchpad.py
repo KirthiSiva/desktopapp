@@ -1,6 +1,8 @@
 from pathlib import Path 
 import customtkinter as ctk 
 from PIL import Image
+import urllib.request
+import json
 
 DIR_OF_FILE = Path(__file__).resolve().parent
 
@@ -26,6 +28,13 @@ app.after(0, lambda: app.state('zoomed'))
 
 # set a minimum size that the screen can be 
 app.minsize(1368, 768)
+
+
+location_req = urllib.request.Request("https://get.geojs.io/v1/ip/geo.json", headers={'User-Agent': 'Mozilla/5.0'})
+with urllib.request.urlopen(location_req) as response: 
+    geo_data = json.loads(response.read().decode())
+    city = geo_data["city"]
+print(city)
 
 my_image = ctk.CTkImage(light_image=Image.open(PC_LIGHT), dark_image=Image.open(PC_DARK), size = (90, 115))
 img_lbl = ctk.CTkLabel(app, image=my_image, text="", fg_color="transparent", bg_color="transparent")
