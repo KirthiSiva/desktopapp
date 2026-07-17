@@ -5,6 +5,8 @@ DISCLAIMER: This app requires at least a 1920x1080 screen, and it is only tested
 --- 
 
 ## About: 
+<img width="1919" height="1030" alt="Screenshot 2026-07-17 143156" src="https://github.com/user-attachments/assets/d769a262-df02-408b-bb4e-a70de758368d" />
+
 Monochromia is a smart dashboard which is designed to stay on your desktop! It utilizes a monochrome theme utilizing CustomTkinter to stay clean and sleek. The dashboard is highly conveient, working easily out of the box, only requiring you to download some python libraries! 
 
 ## How to run: 
