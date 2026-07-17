@@ -26,11 +26,6 @@ DIR = Path(__file__).resolve().parent
 google_font_dir = DIR / "widgets" / "assets" / "GoogleSansFlex-VariableFont_GRAD,ROND,opsz,slnt,wdth,wght.ttf"
 ctk.FontManager.load_font(str(google_font_dir))
 
-# function to read from the to_do list json
-# this will not check whether it is completed or not, that will be done later
-def save_read_todo(): 
-    pass
-
 # start the dashboard 
 app = ctk.CTk() 
 
