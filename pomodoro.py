@@ -41,6 +41,11 @@ class Timer(ctk.CTkFrame):
     
     # function for stopping and resetting the timer 
     def stop_clicked(self): 
+        # kill background loop so that it does not break when starting tiemr again
+        if self.timer_id is not None: 
+            self.after_cancel(self.timer_id) 
+            self.timer_id = None
+        
         # kill the loop, and refresh back to 25 minutes
         self.running = False 
         self.timer_mode = "work"
@@ -87,10 +92,11 @@ class Timer(ctk.CTkFrame):
             self.timer.configure(text = time_screen)
             
             # keep doing this every second
-            self.after(1000, self.countdown_loop)
+            self._timer_id = self.after(1000, self.countdown_loop)
         
         # if the timer hits 0
         else:
+            self.timer_id = None 
             self.swap_modes() # now, it will do a 5 minute timer, then a 25, and repeat.
         
     # this is the function that changes the time from 25 to 5 
@@ -107,6 +113,10 @@ class Timer(ctk.CTkFrame):
         minutes, seconds = divmod(self.seconds_left, 60)
         time_screen = f"{minutes:02d}:{seconds:02d}" #02d forces at least 2 ditis (e.g. turns 6:25 into 06:25)
         
+        # add to screen
+        self.timer.configure(text=time_screen)
+        
         # keep the loop running again 
         self.last_tick = time.time() 
         self.after(10, self.countdown_loop)
+        self._timer_id = self.after(1000, self.countdown_loop)
