@@ -1,16 +1,16 @@
 [build-system]
 requires = ["setuptools>=77.0.3"]
-build-backend = "setuptools.build_meta" 
+build-backend = "setuptools.build_meta"
 
-[project] 
-name = "monochromia" 
+[project]
+name = "monochromia"
 version = "1.0.0"
 authors = [
     {name="Kirthi Siva", email="kirthisiva249@gmail.com" },
 ]
-description = "Smart Dashboard with the most simple, minimalistic UI" 
-readme = "README.md" 
-requires-python = ">=3.9" 
+description = "Smart Dashboard with the most simple, minimalistic UI"
+readme = "README.md"
+requires-python = ">=3.9"
 license = "MIT"
 license-files = ["LICENSE*"]
 classifiers = [
