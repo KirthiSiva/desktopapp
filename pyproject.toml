@@ -32,3 +32,6 @@ monochromia = "monochromia.main:main"
 
 [tool.setuptools.package-data]
 monochromia = ["widgets/assets/*"]
+
+[tool.setuptools.packages.find]
+include = ["monochromia*"]
